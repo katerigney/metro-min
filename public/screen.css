@@ -31,6 +31,12 @@ body {
 #volunteer-headline{
   font-family: 'Permanent Marker', cursive;
   margin:1em;
+  font-size: 25px;
+  color: #225575;
+}
+
+.login-button{
+  margin:1em 3em 1em 1em ;
 
 }
 
