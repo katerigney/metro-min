@@ -37,9 +37,34 @@ body {
 
 .login-button{
   margin:1em 3em 1em 1em ;
-
+  color: #007bff;
+  background-color: white;
+  border: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: bold;S
 }
 
 #sort-by{
-  color: gray
+  color: gray;
+}
+
+.feed-container{
+  margin:1em 3em 1em 3em ;
+  border: 5px solid red;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.item-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feed-item-container {
+  border: 5px solid red;
+
 }
