@@ -6,4 +6,34 @@ body {
   margin: 0;
   min-height: 100%;
   font: 16px / 1 sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header{
+  border-top: 10px solid #007bff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftSideHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo{
+  margin:1em 1em 1em 3em ;
+}
+
+#volunteer-headline{
+  font-family: 'Permanent Marker', cursive;
+  margin:1em;
+
+}
+
+#sort-by{
+  color: gray
 }
