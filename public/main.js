@@ -36,19 +36,16 @@ window.onclick = function(event) {
 // Main function runs when page loads
 // Initializes all necessary DOM elements for search.
 const main = () => {
-  /***** Remove comments when integrated into html.*****
   zipInput = document.querySelector(".zipCode");
   radInput = document.querySelector(".radius");
   countInput = document.querySelector(".count");
-  */
 }
 
 const locationSearch = (event) => {
   params.zipCode = zipInput.value;
   params.distRadius = radInput.value;
   params.count = countInput.value;
-  // Uncomment getGroups when search button is integrated correctly.
-  // getGroups(params);
+  getGroups(params);
 }
 
 const getGroups = (paramsObj) => {
@@ -79,7 +76,6 @@ const getUser = (id) => {
       if(data.messagable === true) {
         leaderInfo.push(data);
       }
-      // $('.tag-2').text(JSON.stringify(data.messagable)); // Set data that comes back from the server to 'text'
     },
     // error: function()
     dataType: 'jsonp',
@@ -87,3 +83,6 @@ const getUser = (id) => {
 }
 
 document.addEventListener('DOMContentLoaded', main);
+
+// TODO: Create function that builds each individual line item.
+// Will get called when API data is collected/pulled.
