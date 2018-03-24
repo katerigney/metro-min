@@ -14,25 +14,6 @@ const params = {
   count: 3
 };
 
-// COMMENTING MODAL
-
-// Open the modal
-const modal = document.querySelector('#modal-container');
-
-const testButton = () => {
-  modal.style.display = "block";
-}
-
-const closeModal = () => {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
 // Main function runs when page loads
 // Initializes all necessary DOM elements for search.
 const main = () => {
@@ -49,12 +30,12 @@ const locationSearch = (event) => {
 }
 
 const getGroups = (paramsObj) => {
-  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode ? `&zip=${paramsObj.zipCode}` : ""}${paramsObj.distRadius ? `&radius=${paramsObj.distRadius}` : ""}${ paramsObj.count ? `&page=${paramsObj.count}` : "&page=40"}`;
+  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode ? `&zip=${paramsObj.zipCode}` : ""}${paramsObj.distRadius ? `&radius=${paramsObj.distRadius}` : ""}${paramsObj.count ? `&page=${paramsObj.count}` : "&page=40"}`;
 
-  $.ajax({ 
-    type:"GET", // GET = requesting data
-    url: searchUrl, 
-    success: function(data) { 
+  $.ajax({
+    type: "GET", // GET = requesting data
+    url: searchUrl,
+    success: function (data) {
       data.data.forEach((group) => {
         foundIDs.push(group.organizer.id);
       });
@@ -62,18 +43,19 @@ const getGroups = (paramsObj) => {
     // error: function()
     dataType: 'jsonp',
   }).then((data2) => {
-    for(let i = 0; i < foundIDs.length; i++) {
+    for (let i = 0; i < foundIDs.length; i++) {
       getUser(foundIDs[i]);
     }
-  });
+  })
+  // .then run the loop function over array (leaderInfo);
 }
 
 const getUser = (id) => {
-  $.ajax({ 
-    type:"GET", // GET = requesting data
-    url:`https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`, 
-    success: function(data) {
-      if(data.messagable === true) {
+  $.ajax({
+    type: "GET", // GET = requesting data
+    url: `https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`,
+    success: function (data) {
+      if (data.messagable === true) {
         leaderInfo.push(data);
       }
     },
@@ -82,7 +64,41 @@ const getUser = (id) => {
   });
 }
 
+// Create function that builds each individual line item.
+const addLineItem = () => {
+  let parent = document.querySelector(".feed-container");
+  let section = document.createElement('section');
+  parent.appendChild(section);
+  section.textContent = 'testing'
+}
+
+
+//push API data into sections in DOM / Display Data
+
+
+
+
+
+// COMMENTING MODAL
+
+// Open the modal
+const modal = document.querySelector('#modal-container');
+
+const testButton = () => {
+  modal.style.display = "block";
+}
+
+const closeModal = () => {
+  modal.style.display = "none";
+}
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 document.addEventListener('DOMContentLoaded', main);
 
-// TODO: Create function that builds each individual line item.
-// Will get called when API data is collected/pulled.
+
+
