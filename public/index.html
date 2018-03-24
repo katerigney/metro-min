@@ -22,7 +22,10 @@
   <section class="feed-container">
     <section class="feed-management">
       <form>
-        <input type="text" class="searchBox">
+        <!-- <input type="text" class="searchBox"> -->
+        <input class="zipCode" type="text" placeholder="zip code here">
+        <input class="radius" type="text" placeholder="radius (1-100)">
+        <input class="count" type="text" placeholder="# of results">
         <button type="button" class="button" onclick="locationSearch()">SEARCH BY ZIP CODE</button>
       </form>
       <h6 id="sort-by">Sort by</h6>
@@ -63,7 +66,10 @@
   </section>
 
 
-
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
   <script src="./main.js" charset="utf-8"></script>
 </body>
 
