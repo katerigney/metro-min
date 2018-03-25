@@ -14,6 +14,8 @@ const params = {
   count: 3
 };
 
+console.log(params);
+
 // COMMENTING MODAL
 
 // Open the modal
@@ -49,12 +51,14 @@ const locationSearch = (event) => {
 }
 
 const getGroups = (paramsObj) => {
-  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode ? `&zip=${paramsObj.zipCode}` : ""}${paramsObj.distRadius ? `&radius=${paramsObj.distRadius}` : ""}${ paramsObj.count ? `&page=${paramsObj.count}` : "&page=40"}`;
+  console.log(paramsObj);
+  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode ? `&zip=${paramsObj.zipCode}` : ""}${paramsObj.distRadius ? `&radius=${paramsObj.distRadius}` : ""}${ paramsObj.count ? `&page=${paramsObj.count}` : "&page=5"}`;
 
   $.ajax({ 
     type:"GET", // GET = requesting data
     url: searchUrl, 
-    success: function(data) { 
+    success: function(data) {
+      console.log(data);
       data.data.forEach((group) => {
         foundIDs.push(group.organizer.id);
       });
@@ -74,6 +78,13 @@ const getUser = (id) => {
     url:`https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`, 
     success: function(data) {
       if(data.messagable === true) {
+        data.rating = 0;
+        data.changeRate = function() {
+          // Using a normal function changes the this binding.
+          // TODO: connect a input field to this function and collect the value.
+          console.log(this.rating);
+        }
+        data.changeRate();
         leaderInfo.push(data);
       }
     },
@@ -81,6 +92,12 @@ const getUser = (id) => {
     dataType: 'jsonp',
   });
 }
+
+// This will need to exist on the individual object.
+// We can refactor it later after the data gets put together.
+// const changeRating = (rate) => {
+//   console.log(this.rating);
+// }
 
 document.addEventListener('DOMContentLoaded', main);
 
