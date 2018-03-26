@@ -124,7 +124,7 @@ const addDataToRow = () => {
 }
 
 const addText = (insertText, section) => {
-  let newText = createNode('p')
+  let newText = createNode('P')
   console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
