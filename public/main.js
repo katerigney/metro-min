@@ -1,5 +1,6 @@
 // Declaring necessary variables.
 const foundIDs = [];
+const foundGroups = [];
 const leaderInfo = [];
 const API_KEY = "34374832f4d2a48753f354e125a4bf";
 let zipInput;
@@ -33,11 +34,11 @@ const locationSearch = (event) => {
 const getGroups = (paramsObj) => {
   const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode
     ? `&zip=${paramsObj.zipCode}`
-    : ""}${paramsObj.distRadius
+    : "&zip=33602"}${paramsObj.distRadius
       ? `&radius=${paramsObj.distRadius}`
       : ""}${paramsObj.count
         ? `&page=${paramsObj.count}`
-        : "&page=40"}`;
+        : "&page=2"}`;
 
   $.ajax({
     type: "GET", // GET = requesting data
@@ -47,6 +48,7 @@ const getGroups = (paramsObj) => {
         .data
         .forEach((group) => {
           foundIDs.push(group.organizer.id);
+          foundGroups.push(group.name);
         });
     },
     // error: function()
@@ -55,8 +57,9 @@ const getGroups = (paramsObj) => {
     console.log("getting groups", data2)
     const _data = data2.data;
     // create array for all the promies,
-    const _tasks = _data.map((item) => {
-        return getUser(item.organizer.id)
+    const _tasks = _data.map((item, index) => {
+      // console.log(index);
+      return getUser(item.organizer.id, index);
     });
     console.log(_tasks)
     Promise
@@ -69,13 +72,15 @@ const getGroups = (paramsObj) => {
   }).then()
 }
 
-const getUser = (id) => {
+const getUser = (id, ind) => {
   return new Promise((resolve, failure) => {
     $.ajax({
       type: "GET", // GET = requesting data
       url: `https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`,
       dataType: 'jsonp',
       success: function (data) {
+        console.log(ind);
+        data.groupName = foundGroups[ind];
         if (data.messagable === true) {
           leaderInfo.push(data);
         }
@@ -84,44 +89,61 @@ const getUser = (id) => {
       error: failure
     });
   })
-
 }
+
+//this needs to be a part of the for loop!
 
 // Create function that builds each individual line item.
 const addLineItemContainer = () => {
-  //Make main container for Item line
-  let parent = document.querySelector(".feed-container");
-  let section = document.createElement('section');
-  parent.appendChild(section);
-  section.textContent = ("testing");
-  section
-    .classList
-    .add("lineItemContainer");
-  addDataToRow();
-}
-
-const addDataToRow = () => {
-  console.log("Add Data Function started")
-  console.log(leaderInfo);
-  console.log(leaderInfo.length);
-  //for each result, create a container for it
   for (let i = 0; i < leaderInfo.length; i++) {
-    console.log("looping", leaderInfo[i].name); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
-    let parent = document.querySelector(".lineItemContainer");
+    let parent = document.querySelector(".feed-container");
     let section = document.createElement('section');
     parent.appendChild(section);
     section
       .classList
-      .add("lineItemPropertyContainer");
-    //then pull in the data
-    const name = () => {
-      let insertText = leaderInfo[i].name;
-      addText(insertText, section);
-    }
-    //there will be more - contact, location, etc.
+      .add("lineItemContainer");
+    // addDataToRow();
+    console.log("looping", leaderInfo[i].name); 
+    let parent2 = document.querySelector(".lineItemContainer");
+    let section2 = document.createElement('section');
+    parent2.appendChild(section2);
+    section2.classList.add("lineItemPropertyContainer");
+
+    name(i, section2);
+    org(i, section2);
+    locationDisplay(i, section2);
+    contact(i, section2);
 
   }
 }
+
+// location = city
+//contact = member URL
+// org/affiliation = category.name
+
+const name = (index,section) => {
+  let insertText = leaderInfo[index].name;
+  addText(insertText,section);
+}
+
+const org = (index,section) => {
+  console.log(index, leaderInfo[index])
+  let insertText = leaderInfo[index].groupName;
+  addText(insertText,section);
+}
+
+const locationDisplay = (index,section) => {
+  let insertText = leaderInfo[index].city;
+  addText(insertText,section);
+  console.log(insertText)
+}
+
+const contact = (index,section) => {
+  let insertText = leaderInfo[index].link;
+  addText(insertText,section);
+  console.log(insertText)
+}
+
 
 const addText = (insertText, section) => {
   let newText = createNode('P')
