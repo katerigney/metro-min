@@ -1,7 +1,7 @@
 // Declaring necessary variables.
 const foundIDs = [];
 const leaderInfo = [];
-const API_KEY = "34374832f4d2a48753f354e125a4bf";
+const API_KEY = "24453f5f52401d305f371c3b1f185520";
 let zipInput;
 let radInput;
 let countInput;
@@ -14,8 +14,8 @@ const params = {
   count: 3
 };
 
-// Main function runs when page loads
-// Initializes all necessary DOM elements for search.
+// Main function runs when page loads Initializes all necessary DOM elements for
+// search.
 const main = () => {
   zipInput = document.querySelector(".zipCode");
   radInput = document.querySelector(".radius");
@@ -30,39 +30,61 @@ const locationSearch = (event) => {
 }
 
 const getGroups = (paramsObj) => {
-  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode ? `&zip=${paramsObj.zipCode}` : ""}${paramsObj.distRadius ? `&radius=${paramsObj.distRadius}` : ""}${paramsObj.count ? `&page=${paramsObj.count}` : "&page=40"}`;
+  const searchUrl = `https://api.meetup.com/find/groups?key=${API_KEY}&sign=true&photo-host=public${paramsObj.zipCode
+    ? `&zip=${paramsObj.zipCode}`
+    : ""}${paramsObj.distRadius
+      ? `&radius=${paramsObj.distRadius}`
+      : ""}${paramsObj.count
+        ? `&page=${paramsObj.count}`
+        : "&page=40"}`;
 
   $.ajax({
     type: "GET", // GET = requesting data
     url: searchUrl,
     success: function (data) {
-      data.data.forEach((group) => {
-        foundIDs.push(group.organizer.id);
-      });
+      data
+        .data
+        .forEach((group) => {
+          foundIDs.push(group.organizer.id);
+        });
     },
     // error: function()
-    dataType: 'jsonp',
+    dataType: 'jsonp'
   }).then((data2) => {
-    for (let i = 0; i < foundIDs.length; i++) {
-      getUser(foundIDs[i]);
-    }
-  }).then(addLineItemContainer)
+    console.log("getting groups", data2)
+    const _data = data2.data;
+    // create array for all the promies,
+    const _tasks = _data.map((item) => {
+        return getUser(item.organizer.id)
+    });
+    console.log(_tasks)
+    Promise
+      .all(_tasks)
+      .then((done) => {
+        console.log("we are done")
+        addLineItemContainer();
+      });
+
+  }).then()
 }
 
 const getUser = (id) => {
-  $.ajax({
-    type: "GET", // GET = requesting data
-    url: `https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`,
-    success: function (data) {
-      if (data.messagable === true) {
-        leaderInfo.push(data);
-      }
-    },
-    // error: function()
-    dataType: 'jsonp',
-  });
-}
+  return new Promise((resolve, failure) => {
+    $.ajax({
+      type: "GET", // GET = requesting data
+      url: `https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`,
+      dataType: 'jsonp',
+      success: function (data) {
+        if (data.messagable === true) {
+          leaderInfo.push(data);
+        }
+        resolve();
+      },
+      error: failure
+    });
+  })
 
+}
 
 // Create function that builds each individual line item.
 const addLineItemContainer = () => {
@@ -71,9 +93,11 @@ const addLineItemContainer = () => {
   let section = document.createElement('section');
   parent.appendChild(section);
   section.textContent = ("testing");
-  section.classList.add("lineItemContainer");
+  section
+    .classList
+    .add("lineItemContainer");
   addDataToRow();
-  }
+}
 
 const addDataToRow = () => {
   console.log("Add Data Function started")
@@ -85,7 +109,9 @@ const addDataToRow = () => {
     let parent = document.querySelector("lineItemContainer");
     let section = document.createElement('section');
     parent.appendChild(section);
-    section.classList.add("lineItemPropertyContainer");
+    section
+      .classList
+      .add("lineItemPropertyContainer");
     //then pull in the data
     const name = () => {
       let insertText = leaderInfo[i].name;
@@ -111,10 +137,7 @@ const append = (parent, el) => {
   return parent.appendChild(el);
 }
 
-
-// COMMENTING MODAL
-
-// Open the modal
+// COMMENTING MODAL Open the modal
 const modal = document.querySelector('#modal-container');
 
 const testButton = () => {
@@ -132,6 +155,3 @@ window.onclick = function (event) {
 }
 
 document.addEventListener('DOMContentLoaded', main);
-
-
-
