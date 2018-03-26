@@ -46,8 +46,7 @@ const getGroups = (paramsObj) => {
     for (let i = 0; i < foundIDs.length; i++) {
       getUser(foundIDs[i]);
     }
-  })
-  addLineItemContainer();
+  }).then(addLineItemContainer)
 }
 
 const getUser = (id) => {
@@ -79,17 +78,20 @@ const addLineItemContainer = () => {
 const addDataToRow = () => {
   console.log("Add Data Function started")
   console.log(leaderInfo);
+  console.log(leaderInfo.length);
+  //for each result, create a container for it
   for (let i = 0; i < leaderInfo.length; i++) {
     console.log("looping"); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
     let parent = document.querySelector("lineItemContainer");
     let section = document.createElement('section');
     parent.appendChild(section);
     section.classList.add("lineItemPropertyContainer");
-    
+    //then pull in the data
     const name = () => {
       let insertText = leaderInfo[i].name;
       addText(insertText, section);
     }
+    //there will be more - contact, location, etc.
 
   }
 }

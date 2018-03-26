@@ -46,6 +46,8 @@ body {
 
 .hero-container {
   margin:1em 3em 1em 3em ;
+  display: flex;
+  flex-direction: column;
 }
 
 .feed-management{
@@ -64,8 +66,6 @@ body {
   margin:1em 3em 1em 3em ;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* align-items: center; */
 }
 
 .item-labels {
