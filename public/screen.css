@@ -44,6 +44,12 @@ body {
   font-style: bold;
 }
 
+.hero-container {
+  margin:1em 3em 1em 3em ;
+  display: flex;
+  flex-direction: column;
+}
+
 .feed-management{
   display: flex;
   flex-direction: row;
@@ -58,11 +64,8 @@ body {
 
 .feed-container{
   margin:1em 3em 1em 3em ;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* align-items: center; */
 }
 
 .item-labels {
@@ -73,10 +76,11 @@ body {
   border-bottom: .25px solid gray;
 }
 
-.feed-item-container {
-  border: 1px solid red;
-  height: 20px;
+.lineItemContainer {
+  margin: 0em;
+  border: 3px solid red;
 }
+
 
 
 /* COMMENTING MODAL */

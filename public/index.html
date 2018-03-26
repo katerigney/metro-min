@@ -19,14 +19,14 @@
     <button class="button">LOG IN</button>
   </section>
 
-  <section class="feed-container">
+  <section class="hero-container">
     <section class="feed-management">
       <form>
         <!-- <input type="text" class="searchBox"> -->
-        <input class="zipCode" type="text" placeholder="zip code here">
-        <input class="radius" type="text" placeholder="radius (1-100)">
-        <input class="count" type="text" placeholder="# of results">
-        <button type="button" class="button" onclick="locationSearch()">SEARCH BY ZIP CODE</button>
+        <input class="zipCode" type="text" placeholder="ZIP code">
+        <input class="radius" type="text" placeholder="Radius (1-100)">
+        <input class="count" type="text" placeholder="How many results?">
+        <button type="button" class="button" onclick="locationSearch()">SEARCH</button>
       </form>
       <h6 id="sort-by">Sort by</h6>
     </section>
@@ -36,11 +36,16 @@
       <h5 class="items-detail" id="org-aff">Organization/Affiliation</h5>
       <h5 class="items-detail" id="date">Establish Date</h5>
       <h5 class="items-detail" id="from">Location</h5>
+      <h5 class="items-detail" id="from">Contact</h5>
       <h5 class="items-detail" id="rating">Rating</h5>
     </section>
-    <section class="feed-item-container">
-      <button class="open-modal" onclick="testButton()">Test Modal</button>
+    <section class="feed-container">
     </section>
+    
+    <button class="addLineItem" onclick="addLineItemContainer()">Add Line Item</button>
+
+    <button class="open-modal" onclick="testButton()">Test Modal</button>
+
   </section>
 
 
