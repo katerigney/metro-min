@@ -47,7 +47,7 @@ const getGroups = (paramsObj) => {
       getUser(foundIDs[i]);
     }
   })
-  // .then run the loop function over array (leaderInfo);
+  addLineItemContainer();
 }
 
 const getUser = (id) => {
@@ -64,19 +64,50 @@ const getUser = (id) => {
   });
 }
 
+
 // Create function that builds each individual line item.
-const addLineItem = () => {
+const addLineItemContainer = () => {
+  //Make main container for Item line
   let parent = document.querySelector(".feed-container");
   let section = document.createElement('section');
   parent.appendChild(section);
-  section.textContent = 'testing'
+  section.textContent = ("testing");
+  section.classList.add("lineItemContainer");
+  addDataToRow();
+  }
+
+const addDataToRow = () => {
+  console.log("Add Data Function started")
+  console.log(leaderInfo);
+  for (let i = 0; i < leaderInfo.length; i++) {
+    console.log("looping"); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
+    let parent = document.querySelector("lineItemContainer");
+    let section = document.createElement('section');
+    parent.appendChild(section);
+    section.classList.add("lineItemPropertyContainer");
+    
+    const name = () => {
+      let insertText = leaderInfo[i].name;
+      addText(insertText, section);
+    }
+
+  }
 }
 
+const addText = (insertText, section) => {
+  let newText = createNode('p')
+  console.log(newText)
+  newText.textContent = insertText;
+  append(section, newText);
+}
 
-//push API data into sections in DOM / Display Data
+const createNode = (element) => {
+  return document.createElement(element)
+}
 
-
-
+const append = (parent, el) => {
+  return parent.appendChild(el);
+}
 
 
 // COMMENTING MODAL

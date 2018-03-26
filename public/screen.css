@@ -44,6 +44,10 @@ body {
   font-style: bold;
 }
 
+.hero-container {
+  margin:1em 3em 1em 3em ;
+}
+
 .feed-management{
   display: flex;
   flex-direction: row;
@@ -56,9 +60,8 @@ body {
   /* padding: -.25em 0em; */
 }
 
-.hero-container{
+.feed-container{
   margin:1em 3em 1em 3em ;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
@@ -73,10 +76,11 @@ body {
   border-bottom: .25px solid gray;
 }
 
-.feed-item-container {
-  border: 1px solid red;
-  height: 20px;
+.lineItemContainer {
+  margin: 0em;
+  border: 3px solid red;
 }
+
 
 
 /* COMMENTING MODAL */
