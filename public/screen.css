@@ -78,7 +78,12 @@ body {
 
 .lineItemContainer {
   margin: 0em;
-  border: 3px solid red;
+  width: 100%;
+}
+
+.lineItemPropertyContainer:nth-child(2n) {
+  background: rgb(219, 219, 219);
+  padding:1em;
 }
 
 

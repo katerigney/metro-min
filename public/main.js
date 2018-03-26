@@ -56,7 +56,7 @@ const getGroups = (paramsObj) => {
     const _data = data2.data;
     // create array for all the promies,
     const _tasks = _data.map((item) => {
-        return getUser(item.organizer.id)
+      return getUser(item.organizer.id)
     });
     console.log(_tasks)
     Promise
@@ -87,40 +87,50 @@ const getUser = (id) => {
 
 }
 
+//this needs to be a part of the for loop!
+
 // Create function that builds each individual line item.
 const addLineItemContainer = () => {
-  //Make main container for Item line
-  let parent = document.querySelector(".feed-container");
-  let section = document.createElement('section');
-  parent.appendChild(section);
-  section.textContent = ("testing");
-  section
-    .classList
-    .add("lineItemContainer");
-  addDataToRow();
-}
-
-const addDataToRow = () => {
-  console.log("Add Data Function started")
-  console.log(leaderInfo);
-  console.log(leaderInfo.length);
-  //for each result, create a container for it
   for (let i = 0; i < leaderInfo.length; i++) {
-    console.log("looping", leaderInfo[i].name); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
-    let parent = document.querySelector(".lineItemContainer");
+    let parent = document.querySelector(".feed-container");
     let section = document.createElement('section');
     parent.appendChild(section);
+    // section.textContent = ("testing");
     section
       .classList
-      .add("lineItemPropertyContainer");
-    //then pull in the data
-    const name = () => {
-      let insertText = leaderInfo[i].name;
-      addText(insertText, section);
-    }
-    //there will be more - contact, location, etc.
+      .add("lineItemContainer");
+    // addDataToRow();
+    console.log("looping", leaderInfo[i].name); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
+    let parent2 = document.querySelector(".lineItemContainer");
+    let section2 = document.createElement('section');
+    parent2.appendChild(section2);
+    section2.classList.add("lineItemPropertyContainer");
 
+    name(i, section2);
   }
+}
+
+// const addDataToRow = () => {
+//   console.log("Add Data Function started")
+//   console.log(leaderInfo);
+//   console.log(leaderInfo.length);
+//   //for each result, create a container for it
+//   for (let i = 0; i < leaderInfo.length; i++) {
+//     console.log("looping", leaderInfo[i].name); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
+//     let parent = document.querySelector(".lineItemContainer");
+//     let section = document.createElement('section');
+//     parent.appendChild(section);
+//     section.classList.add("lineItemPropertyContainer");
+
+//     name(i, section);
+
+//   }
+// }
+
+const name = (index,section) => {
+  let insertText = leaderInfo[index].name;
+  addText(insertText,section);
+  console.log(insertText)
 }
 
 const addText = (insertText, section) => {
