@@ -1,7 +1,7 @@
 // Declaring necessary variables.
 const foundIDs = [];
 const leaderInfo = [];
-const API_KEY = "24453f5f52401d305f371c3b1f185520";
+const API_KEY = "34374832f4d2a48753f354e125a4bf";
 let zipInput;
 let radInput;
 let countInput;
@@ -13,6 +13,7 @@ const params = {
   distRadius: radius,
   count: 3
 };
+
 
 // Main function runs when page loads Initializes all necessary DOM elements for
 // search.
@@ -105,8 +106,8 @@ const addDataToRow = () => {
   console.log(leaderInfo.length);
   //for each result, create a container for it
   for (let i = 0; i < leaderInfo.length; i++) {
-    console.log("looping"); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
-    let parent = document.querySelector("lineItemContainer");
+    console.log("looping", leaderInfo[i].name); //<<<<<<<<<<<NOT SHOWING UP - ERROR WITH FOR LOOP?
+    let parent = document.querySelector(".lineItemContainer");
     let section = document.createElement('section');
     parent.appendChild(section);
     section
