@@ -96,7 +96,7 @@ const getUser = (id, ind) => {
         data.DOMElements.rating.setAttribute("min", 0);
         data.DOMElements.rating.setAttribute("max", 5);
         data.DOMElements.rating.setAttribute("value", 0);
-        
+
         data.DOMElements.contact = createDOMElement("a",data.link, data.link);
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
@@ -145,6 +145,34 @@ const addLineItemContainer = () => {
   }
 }
 
+const sortLeaders = (prop, dir) => {
+  console.log(leaderInfo[0][prop], dir);
+  let newArr = leaderInfo.sort((a,b) => {
+    if(dir === "asc") {
+      console.log(a.name, b.name);
+      // return a.name - b.name;
+      if(a.name.toLowerCase() < b.name.toLowerCase()) {
+        return -1;
+      } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      // return b.name - a.name;
+      if(a.name.toLowerCase() > b.name.toLowerCase()) {
+        return -1;
+      } else if (a.name.toLowerCase() < b.name.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+  });
+  console.log(newArr);
+}
+
 
 
 const name = (index, section) => {
@@ -179,7 +207,7 @@ const rating = (section) => {
 
 
 const addText = (insertText, section) => {
-  let newText = createNode('h6')
+  let newText = createNode('p')
   console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
