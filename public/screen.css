@@ -72,18 +72,27 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   border-bottom: .25px solid gray;
 }
 
 .lineItemContainer {
   margin: 0em;
-  width: 100%;
+  padding:1em 0em 1em 0em;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.lineItemPropertyContainer:nth-child(2n) {
-  background: rgb(219, 219, 219);
+/* .lineItemPropertyContainer {
+  margin: 0em;
   padding:1em;
+  max-width: 100%;
+} */
+
+.lineItemContainer:nth-child(2n) {
+  background: rgb(219, 219, 219);
+  padding:1em 0em 1em 0em;
 }
 
 
