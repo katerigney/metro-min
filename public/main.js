@@ -94,7 +94,11 @@ const getUser = (id, ind) => {
         // data.DOMElements.rating = document.createElement('input');
         // data.DOMElements.rating.setAttribute("type", "number");
         // console.log(data.DOMElements);
-        data.DOMElements.rating = createDOMElement("input", "number");
+        data.DOMElements.rating = createDOMElement("input", "", "number");
+        data.DOMElements.contact = createDOMElement("a",data.link, data.link);
+        data.DOMElements.location = createDOMElement("p", data.city);
+        data.DOMElements.org = createDOMElement("p", data.groupName);
+        data.DOMElements.name = createDOMElement("p", data.name);
         // data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
@@ -183,11 +187,14 @@ const append = (parent, el) => {
 
 
 // A short function I'm using to create DOM elements and place them on the leaders object.
-const createDOMElement = (type, inputType ) => {
+const createDOMElement = (type, text, inputType ) => {
   let temp = document.createElement(type);
-  if(type = "input") {
+  if(type === "input") {
     temp.setAttribute("type", inputType);
+  } else if(type === "a") {
+    temp.setAttribute("href", inputType );
   }
+  temp.textContent = text;
   return temp;
   // data.DOMElements.rating = document.createElement(type);
   // data.DOMElements.rating.setAttribute("type", "number");
