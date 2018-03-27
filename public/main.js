@@ -2,7 +2,7 @@
 const foundIDs = [];
 const foundGroups = [];
 const leaderInfo = [];
-const API_KEY = "34374832f4d2a48753f354e125a4bf";
+const API_KEY = "3a3d332036327b42594f404c37282d1c";
 let zipInput;
 let radInput;
 let countInput;
@@ -44,6 +44,7 @@ const getGroups = (paramsObj) => {
     type: "GET", // GET = requesting data
     url: searchUrl,
     success: function (data) {
+      console.log(data)
       data
         .data
         .forEach((group) => {
@@ -103,50 +104,55 @@ const addLineItemContainer = () => {
       .classList
       .add("lineItemContainer");
     // addDataToRow();
-    console.log("looping", leaderInfo[i].name); 
-    let parent2 = document.querySelector(".lineItemContainer");
-    let section2 = document.createElement('section');
-    parent2.appendChild(section2);
-    section2.classList.add("lineItemPropertyContainer");
-
-    name(i, section2);
-    org(i, section2);
-    locationDisplay(i, section2);
-    contact(i, section2);
-
+    console.log("looping", leaderInfo[i].name);
+    // for (let i = 0; i < leaderInfo.length; i++) {
+    //   let parent2 = document.querySelector(".lineItemContainer");
+    //   let section2 = document.createElement('section');
+    //   parent2.appendChild(section2);
+    //   section2.classList.add("lineItemPropertyContainer");
+      name(i, section);
+      org(i, section);
+      locationDisplay(i, section);
+      contact(i, section);
+      rating(section);
+    // }
   }
 }
 
-// location = city
-//contact = member URL
-// org/affiliation = category.name
 
-const name = (index,section) => {
+
+const name = (index, section) => {
   let insertText = leaderInfo[index].name;
-  addText(insertText,section);
+  addText(insertText, section);
 }
 
-const org = (index,section) => {
+const org = (index, section) => {
   console.log(index, leaderInfo[index])
   let insertText = leaderInfo[index].groupName;
-  addText(insertText,section);
+  addText(insertText, section);
 }
 
-const locationDisplay = (index,section) => {
+const locationDisplay = (index, section) => {
   let insertText = leaderInfo[index].city;
-  addText(insertText,section);
+  addText(insertText, section);
   console.log(insertText)
 }
 
-const contact = (index,section) => {
+const contact = (index, section) => {
   let insertText = leaderInfo[index].link;
-  addText(insertText,section);
+  addText(insertText, section);
+  console.log(insertText)
+}
+
+const rating = (section) => {
+  let insertText = "placeholder rating";
+  addText(insertText, section);
   console.log(insertText)
 }
 
 
 const addText = (insertText, section) => {
-  let newText = createNode('P')
+  let newText = createNode('p')
   console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
