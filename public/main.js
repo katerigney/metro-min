@@ -82,6 +82,26 @@ const getUser = (id, ind) => {
       success: function (data) {
         console.log(ind);
         data.groupName = foundGroups[ind];
+        data.rating = 0;
+        data.changeRate = function(val) {
+          // Using a normal function changes the this binding.
+          // TODO: connect a input field to this function and collect the value.
+          console.log(`${this.rating} is being replaced with ${val}`);
+          this.rating = val;
+        }
+        // 
+        data.DOMElements = {};
+        // Not very DRY, but we can worry about that later.
+        data.DOMElements.rating = createDOMElement("input", "", "number");
+        data.DOMElements.rating.setAttribute("min", 0);
+        data.DOMElements.rating.setAttribute("max", 5);
+        data.DOMElements.rating.setAttribute("value", 0);
+        
+        data.DOMElements.contact = createDOMElement("a",data.link, data.link);
+        data.DOMElements.location = createDOMElement("p", data.city);
+        data.DOMElements.org = createDOMElement("p", data.groupName);
+        data.DOMElements.name = createDOMElement("p", data.name);
+        // data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
         }
@@ -110,11 +130,17 @@ const addLineItemContainer = () => {
     //   let section2 = document.createElement('section');
     //   parent2.appendChild(section2);
     //   section2.classList.add("lineItemPropertyContainer");
-      name(i, section);
-      org(i, section);
-      locationDisplay(i, section);
-      contact(i, section);
-      rating(section);
+
+    section.appendChild(leaderInfo[i].DOMElements.name);
+    section.appendChild(leaderInfo[i].DOMElements.org);
+    section.appendChild(leaderInfo[i].DOMElements.location);
+    section.appendChild(leaderInfo[i].DOMElements.contact);
+    section.appendChild(leaderInfo[i].DOMElements.rating);
+      // name(i, section);
+      // org(i, section);
+      // locationDisplay(i, section);
+      // contact(i, section);
+      // rating(section);
     // }
   }
 }
@@ -144,6 +170,7 @@ const contact = (index, section) => {
   console.log(insertText)
 }
 
+// Temp, replace with rating on leader object.
 const rating = (section) => {
   let insertText = "placeholder rating";
   addText(insertText, section);
@@ -164,6 +191,21 @@ const createNode = (element) => {
 
 const append = (parent, el) => {
   return parent.appendChild(el);
+}
+
+
+// A short function I'm using to create DOM elements and place them on the leaders object.
+const createDOMElement = (type, text, inputType ) => {
+  let temp = document.createElement(type);
+  if(type === "input") {
+    temp.setAttribute("type", inputType);
+  } else if(type === "a") {
+    temp.setAttribute("href", inputType );
+  }
+  temp.textContent = text;
+  return temp;
+  // data.DOMElements.rating = document.createElement(type);
+  // data.DOMElements.rating.setAttribute("type", "number");
 }
 
 // COMMENTING MODAL Open the modal
