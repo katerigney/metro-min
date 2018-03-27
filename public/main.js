@@ -82,6 +82,13 @@ const getUser = (id, ind) => {
       success: function (data) {
         console.log(ind);
         data.groupName = foundGroups[ind];
+        data.rating = 0;
+        data.changeRate = function() {
+          // Using a normal function changes the this binding.
+          // TODO: connect a input field to this function and collect the value.
+          console.log(this.rating);
+        }
+        data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
         }
