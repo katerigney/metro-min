@@ -8,10 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Metro Min</title>
   <link rel="stylesheet" href="./screen.css">
+  <script src="./test.js"></script>
+
 </head>
 
 <body>
-  <section class="header">
+   <section class="header">
     <section class="leftSideHeader">
       <img class="logo" src="./images/mm-logo.png">
       <h1 id="volunteer-headline">Volunteer Ambassadors</h1>
@@ -19,6 +21,7 @@
     <button class="button">LOG IN</button>
   </section>
 
+  
   <section class="hero-container">
     <section class="feed-management">
       <form>
@@ -49,7 +52,7 @@
   </section>
 
 
-  <!-- COMMENTING MODAL -->
+  <!--COMMENTING MODAL -->
 
   <section id="modal-container" class="modal-container">
     <section class="modal-content">
@@ -62,16 +65,15 @@
       <p>Location</p>
       <p>Rating</p>
       <form class="comment-input-container">
-        <textarea rows="10" cols="50" class="commentBox">
+        <textarea rows="10" cols="50" class="commentBox"></textarea>
         <button type="button" class="button" onclick="addItemToSpreadsheet()">ADD TO SPREADSHEET</button>
       </form>
 
     </section>
 
-  </section>
+  </section> 
 
-
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="./main.js" charset="utf-8"></script>
 </body>
 
