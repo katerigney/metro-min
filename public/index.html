@@ -35,11 +35,27 @@
     </section>
     <section class="item-labels">
       <h5 class="items-detail" id="name">Name</h5>
+      <form>
+        <button type="button" onclick="sortLeaders('name','asc')">Sort asc</button>
+        <button type="button" onclick="sortLeaders('name','desc')">Sort desc</button>
+      </form>
       <!-- <h5 class="items-detail" id="title">Title</h5> -->
       <h5 class="items-detail" id="org-aff">Organization/Affiliation</h5>
+      <form>
+        <button type="button" onclick="sortLeaders('groupName','asc')">Sort asc</button>
+        <button type="button" onclick="sortLeaders('groupName','desc')">Sort desc</button>
+      </form>
       <h5 class="items-detail" id="from">Location</h5>
+      <form>
+        <button type="button" onclick="sortLeaders('city','asc')">Sort asc</button>
+        <button type="button" onclick="sortLeaders('city','desc')">Sort desc</button>
+      </form>
       <h5 class="items-detail" id="from">Contact</h5>
       <h5 class="items-detail" id="rating">Rating</h5>
+      <form>
+        <button type="button" onclick="sortLeaders('rating','asc')">Sort asc</button>
+        <button type="button" onclick="sortLeaders('rating','desc')">Sort desc</button>
+      </form>
     </section>
     <section class="feed-container">
       <section class="lineItemContainer">testing</section>

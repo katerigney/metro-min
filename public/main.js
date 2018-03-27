@@ -1,7 +1,7 @@
 // Declaring necessary variables.
 const foundIDs = [];
 const foundGroups = [];
-const leaderInfo = [];
+let leaderInfo = [];
 const API_KEY = "3a3d332036327b42594f404c37282d1c";
 let zipInput;
 let radInput;
@@ -87,7 +87,7 @@ const getUser = (id, ind) => {
           // Using a normal function changes the this binding.
           // TODO: connect a input field to this function and collect the value.
           console.log(`${this.rating} is being replaced with ${val}`);
-          this.rating = val;
+          this.rating = Number(val);
         }
         // 
         data.DOMElements = {};
@@ -96,7 +96,10 @@ const getUser = (id, ind) => {
         data.DOMElements.rating.setAttribute("min", 0);
         data.DOMElements.rating.setAttribute("max", 5);
         data.DOMElements.rating.setAttribute("value", 0);
-        
+        data.DOMElements.rating.addEventListener("input", (e) => {
+          data.changeRate(e.target.value);
+        });
+
         data.DOMElements.contact = createDOMElement("a",data.link, data.link);
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
@@ -116,8 +119,10 @@ const getUser = (id, ind) => {
 
 // Create function that builds each individual line item.
 const addLineItemContainer = () => {
+  let parent = document.querySelector(".feed-container");
+  parent.innerHTML = "";
   for (let i = 0; i < leaderInfo.length; i++) {
-    let parent = document.querySelector(".feed-container");
+    // let parent = document.querySelector(".feed-container");
     let section = document.createElement('section');
     parent.appendChild(section);
     section
@@ -143,6 +148,45 @@ const addLineItemContainer = () => {
       // rating(section);
     // }
   }
+}
+
+// props: "rating", "city", "name",  and "groupName".
+// dir: "asc", desc.
+// Takes in the property and direction and returns a new leaderInfo array with the returned properties.
+
+const sortLeaders = (prop, dir) => {
+  console.log(leaderInfo[0][prop], dir);
+  let newArr = leaderInfo.sort((a,b) => {
+    if(prop === "rating" && dir === "asc") {
+      return Number(a[prop]) - Number(b[prop]);
+    } else if (prop === "rating" && dir !== "asc") {
+      return Number(b[prop]) - Number(a[prop]);
+    }
+    if(dir === "asc") {
+      console.log(a[prop], b[prop]);
+      // return a.name - b.name;
+      if(a[prop].toLowerCase() < b[prop].toLowerCase()) {
+        return -1;
+      } else if (a[prop].toLowerCase() > b[prop].toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      // return b.name - a.name;
+      if(a[prop].toLowerCase() > b[prop].toLowerCase()) {
+        return -1;
+      } else if (a[prop].toLowerCase() < b[prop].toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+  });
+  // console.log(newArr);
+  leaderInfo = newArr;
+  addLineItemContainer();
 }
 
 
@@ -179,7 +223,7 @@ const rating = (section) => {
 
 
 const addText = (insertText, section) => {
-  let newText = createNode('h6')
+  let newText = createNode('p')
   console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
