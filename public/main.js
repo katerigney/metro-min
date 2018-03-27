@@ -91,10 +91,12 @@ const getUser = (id, ind) => {
         }
         // 
         data.DOMElements = {};
-        // data.DOMElements.rating = document.createElement('input');
-        // data.DOMElements.rating.setAttribute("type", "number");
-        // console.log(data.DOMElements);
+        // Not very DRY, but we can worry about that later.
         data.DOMElements.rating = createDOMElement("input", "", "number");
+        data.DOMElements.rating.setAttribute("min", 0);
+        data.DOMElements.rating.setAttribute("max", 5);
+        data.DOMElements.rating.setAttribute("value", 0);
+        
         data.DOMElements.contact = createDOMElement("a",data.link, data.link);
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
@@ -128,11 +130,17 @@ const addLineItemContainer = () => {
     //   let section2 = document.createElement('section');
     //   parent2.appendChild(section2);
     //   section2.classList.add("lineItemPropertyContainer");
-      name(i, section);
-      org(i, section);
-      locationDisplay(i, section);
-      contact(i, section);
-      rating(section);
+
+    section.appendChild(leaderInfo[i].DOMElements.name);
+    section.appendChild(leaderInfo[i].DOMElements.org);
+    section.appendChild(leaderInfo[i].DOMElements.location);
+    section.appendChild(leaderInfo[i].DOMElements.contact);
+    section.appendChild(leaderInfo[i].DOMElements.rating);
+      // name(i, section);
+      // org(i, section);
+      // locationDisplay(i, section);
+      // contact(i, section);
+      // rating(section);
     // }
   }
 }
