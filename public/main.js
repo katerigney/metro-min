@@ -225,41 +225,101 @@ window.onclick = function (event) {
   }
 }
 
-//converts Gov Data excel file to Json 
-function Upload() {
-    console.log("made it to the upload function")
-    var url = document.getElementById("fileUpload").value;
-    var newUrl = url.replace(/^.*[\\\/]/, '')
-    console.log(newUrl)
-    // var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xlsx)$/;
-    // if (regex.test(url.toLowerCase())) {
-        if (typeof (XMLHttpRequest) != "undefined")
+////////
+var rABS = true; // true: readAsBinaryString ; false: readAsArrayBuffer
+function handleFile(e) {
+  var files = e.target.files, f = files[0];
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var data = e.target.result;
+    if(!rABS) data = new Uint8Array(data);
+    var workbook = XLSX.read(data, {type:rABS  ? 'binary' : 'array'});
 
-    // var url = "test.xlsx";
-
-    /* set up async GET request */
-    var req = new XMLHttpRequest();
-    req.open("GET",newUrl , true);
-    req.responseType = "arraybuffer";
-
-    req.onload = function (e) {
-      var arraybuffer = req.response;
-
-      var data = new Uint8Array(arraybuffer);
-      var arr = new Array();
-      for(var i=0; i != data.length; i++) arr[i] = String.fromCharCode(data[i]);
-      var bstr = arr.join("");
-
-      var workbook = XLSX.read(bstr, { type: "binary" });
-
-      /* DO SOMETHING WITH workbook HERE */
-      var first_sheet_name = workbook.SheetNames[0];
+    /* DO SOMETHING WITH workbook HERE */
+    console.log({workbook})
+    var first_sheet_name = workbook.SheetNames[0];
       
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      console.log(XLSX.utils.sheet_to_json(worksheet));
-    }
+    /* Get worksheet */
+    var worksheet = workbook.Sheets[first_sheet_name];
+    let govdata = XLSX.utils.sheet_to_json(worksheet)
+    console.log({govdata});
+    convertGovData(govdata);
+  };
+  if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f);
+}
+document.querySelector("#fileUpload").addEventListener('change', handleFile, false);
 
-    req.send();
-    }
 
+
+//converts Gov Data excel file to Json 
+//function Upload() {
+    // console.log("made it to the upload function")
+    // var url = document.getElementById("fileUpload").value;
+    // var newUrl = url.replace(/^.*[\\\/]/, '')
+    // //console.log(newUrl)
+    //     if (typeof (XMLHttpRequest) != "undefined")
+
+    // /* set up async GET request */
+    // var req = new XMLHttpRequest();
+    // console.log(newUrl)
+    // req.open("GET",newUrl , true);
+    // req.responseType = "arraybuffer";
+
+    // req.onload = function (e) {
+    //   var arraybuffer = req.response;
+
+    //   var data = new Uint8Array(arraybuffer);
+    //   var arr = new Array();
+    //   for(var i=0; i != data.length; i++) arr[i] = String.fromCharCode(data[i]);
+    //   var bstr = arr.join("");
+
+    //   var workbook = XLSX.read(bstr, { type: "binary" });
+
+    //   /* DO SOMETHING WITH workbook HERE */
+    //   var first_sheet_name = workbook.SheetNames[0];
+      
+    //   /* Get worksheet */
+    //   var worksheet = workbook.Sheets[first_sheet_name];
+    //   let govdata = XLSX.utils.sheet_to_json(worksheet)
+    //   console.log(govdata);
+    //   convertGovData(govdata);
+    // }
+
+    // req.send();
+    // }
+
+  //FUNCTION to insert Gov Data into Data Format on Page
+
+  const convertGovData =(govdata)=>{
+    console.log("in convert govdata function" + govdata.length)
+    for(let i=0; i < govdata.length; i++){
+      //need condition to filter orgtype
+      //need to trim company name
+      //need to concat address, address1, statezip
+      //trim statezip to separate FL?
+
+      let govdataObj = {
+        name: govdata[i].contactname,
+        groupName: govdata[i].company,
+        city: govdata[i].city,
+        link: govdata[i].address,
+        rating: 0,
+        DOMElements: {},
+
+      }
+      // Not very DRY, but we can worry about that later.
+      govdataObj.DOMElements.rating = createDOMElement("input", "", "number");
+      govdataObj.DOMElements.rating.setAttribute("min", 0);
+      govdataObj.DOMElements.rating.setAttribute("max", 5);
+      govdataObj.DOMElements.rating.setAttribute("value", 0);
+      
+      govdataObj.DOMElements.contact = createDOMElement("a",govdataObj.link, govdataObj.link);
+      govdataObj.DOMElements.location = createDOMElement("p", govdataObj.city);
+      govdataObj.DOMElements.org = createDOMElement("p", govdataObj.groupName);
+      govdataObj.DOMElements.name = createDOMElement("p", govdataObj.name);
+      leaderInfo.push(govdataObj)
+    }
+    console.log(leaderInfo)
+    addLineItemContainer();
+
+  }
