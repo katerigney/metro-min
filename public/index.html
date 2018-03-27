@@ -3,7 +3,7 @@
 
 <head lang="en">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Permanent+Marker" rel="stylesheet">
-  <!-- <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet"> -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Metro Min</title>
@@ -19,7 +19,7 @@
       <img class="logo" src="./images/mm-logo.png">
       <h1 id="volunteer-headline">Volunteer Ambassadors</h1>
     </section>
-    <button class="login-button">Log in</button>
+    <button class="button">LOG IN</button>
   </section>
   <section>
     <input type="file" id="fileUpload" />
@@ -28,19 +28,56 @@
     <div id="ambassadors">
   </section>
 
-  <section class="feed-container">
+  <section class="hero-container">
     <section class="feed-management">
+      <form>
+        <!-- <input type="text" class="searchBox"> -->
+        <input class="zipCode" type="text" placeholder="ZIP code">
+        <input class="radius" type="text" placeholder="Radius (1-100)">
+        <input class="count" type="text" placeholder="How many results?">
+        <button type="button" class="button" onclick="locationSearch()">SEARCH</button>
+      </form>
       <h6 id="sort-by">Sort by</h6>
     </section>
-    <section class="labels">
-      <h5 id="name">Name</h5>
-      <h5 id="title">Title</h5>
-      <h5 id="org-aff">Organization/Affiliation</h5>
-      <h5 id="date">Establish Date</h5>
-      <h5 id="rating">Rating</h5>
+    <section class="item-labels">
+      <h5 class="items-detail" id="name">Name</h5>
+      <!-- <h5 class="items-detail" id="title">Title</h5> -->
+      <h5 class="items-detail" id="org-aff">Organization/Affiliation</h5>
+      <h5 class="items-detail" id="from">Location</h5>
+      <h5 class="items-detail" id="from">Contact</h5>
+      <h5 class="items-detail" id="rating">Rating</h5>
+    </section>
+    <section class="feed-container">
+    </section>
+
+    <button class="addLineItem" onclick="addLineItem()">Add Line Item</button>
+
+    <button class="open-modal" onclick="testButton()">Test Modal</button>
+
+  </section>
+
+
+  <!-- COMMENTING MODAL -->
+
+  <section id="modal-container" class="modal-container">
+    <section class="modal-content">
+      <section class="close-button-container">
+        <img src="./images/close-button.png" id="close-modal" onclick="closeModal()">
+      </section>
+      <p>Name</p>
+      <p>Title</p>
+      <p>Organization/Affiliation</p>
+      <p>Location</p>
+      <p>Rating</p>
+      <form class="comment-input-container">
+        <textarea rows="10" cols="50" class="commentBox">
+        <button type="button" class="button" onclick="addItemToSpreadsheet()">ADD TO SPREADSHEET</button>
+      </form>
 
     </section>
+
   </section>
+<<<<<<< HEAD
 <!-- <script>
   var url = "test.xlsx";
 
@@ -70,6 +107,11 @@
 
     req.send();
   </script> -->
+=======
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+>>>>>>> 65f231705699990467a549625c5efba47f33a46d
   <script src="./main.js" charset="utf-8"></script>
 </body>
 
