@@ -145,24 +145,33 @@ const addLineItemContainer = () => {
   }
 }
 
+// props: "rating", "city", "name", and "groupName".
+// dir: "asc", desc.
+// Takes in the property and direction and returns a new leaderInfo array with the returned properties.
+
 const sortLeaders = (prop, dir) => {
   console.log(leaderInfo[0][prop], dir);
   let newArr = leaderInfo.sort((a,b) => {
+    if(prop === "rating" && dir === "asc") {
+      return Number(a) - Number(b);
+    } else if (prop === "rating" && dir !== "asc") {
+      return Number(b) - Number(a);
+    }
     if(dir === "asc") {
-      console.log(a.name, b.name);
+      console.log(a[prop], b[prop]);
       // return a.name - b.name;
-      if(a.name.toLowerCase() < b.name.toLowerCase()) {
+      if(a[prop].toLowerCase() < b[prop].toLowerCase()) {
         return -1;
-      } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      } else if (a[prop].toLowerCase() > b[prop].toLowerCase()) {
         return 1;
       } else {
         return 0;
       }
     } else {
       // return b.name - a.name;
-      if(a.name.toLowerCase() > b.name.toLowerCase()) {
+      if(a[prop].toLowerCase() > b[prop].toLowerCase()) {
         return -1;
-      } else if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      } else if (a[prop].toLowerCase() < b[prop].toLowerCase()) {
         return 1;
       } else {
         return 0;
@@ -170,7 +179,8 @@ const sortLeaders = (prop, dir) => {
     }
 
   });
-  console.log(newArr);
+  // console.log(newArr);
+  leaderInfo = newArr;
 }
 
 
