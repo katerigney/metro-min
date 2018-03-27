@@ -224,6 +224,8 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
+
+//converts Gov Data excel file to Json 
 function Upload() {
     console.log("made it to the upload function")
     var url = document.getElementById("fileUpload").value;
@@ -253,7 +255,6 @@ function Upload() {
       /* DO SOMETHING WITH workbook HERE */
       var first_sheet_name = workbook.SheetNames[0];
       
-      // var address_of_cell = 'A1'
       /* Get worksheet */
       var worksheet = workbook.Sheets[first_sheet_name];
       console.log(XLSX.utils.sheet_to_json(worksheet));
@@ -262,4 +263,3 @@ function Upload() {
     req.send();
     }
 
-document.addEventListener('DOMContentLoaded', main);
