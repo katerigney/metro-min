@@ -89,6 +89,12 @@ const getUser = (id, ind) => {
           console.log(`${this.rating} is being replaced with ${val}`);
           this.rating = val;
         }
+        // 
+        data.DOMElements = {};
+        // data.DOMElements.rating = document.createElement('input');
+        // data.DOMElements.rating.setAttribute("type", "number");
+        // console.log(data.DOMElements);
+        data.DOMElements.rating = createDOMElement("input", "number");
         // data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
@@ -152,6 +158,7 @@ const contact = (index, section) => {
   console.log(insertText)
 }
 
+// Temp, replace with rating on leader object.
 const rating = (section) => {
   let insertText = "placeholder rating";
   addText(insertText, section);
@@ -172,6 +179,18 @@ const createNode = (element) => {
 
 const append = (parent, el) => {
   return parent.appendChild(el);
+}
+
+
+// A short function I'm using to create DOM elements and place them on the leaders object.
+const createDOMElement = (type, inputType ) => {
+  let temp = document.createElement(type);
+  if(type = "input") {
+    temp.setAttribute("type", inputType);
+  }
+  return temp;
+  // data.DOMElements.rating = document.createElement(type);
+  // data.DOMElements.rating.setAttribute("type", "number");
 }
 
 // COMMENTING MODAL Open the modal
