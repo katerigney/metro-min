@@ -25,6 +25,7 @@ const main = () => {
 }
 
 const locationSearch = (event) => {
+  console.log(zipInput);
   params.zipCode = zipInput.value;
   params.distRadius = radInput.value;
   params.count = countInput.value;
@@ -328,3 +329,5 @@ document.querySelector("#fileUpload").addEventListener('change', handleFile, fal
     addLineItemContainer();
 
   }
+
+  document.addEventListener('DOMContentLoaded', main);
