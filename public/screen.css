@@ -79,6 +79,8 @@ body {
 .item-label-individual {
   display: flex;
   flex-direction: row;
+  flex-basis: 300px;
+  justify-content: center;
   /* justify-content: flex-start;
   align-items: center; */
 }
@@ -101,19 +103,23 @@ body {
   max-width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   align-items: center;
 }
 
+.lineItemContainer > * {
+  flex-basis: 300px;
+}
+
 .lineItemContainer > p {
-  flex-basis: 20%;
+  /* flex-basis: 20%; */
   text-align: center;
   font-size: 12px;
 }
 
 .lineItemContainer > a {
-  flex-basis: 20%;
+  /* flex-basis: 20%; */
   text-align: center;
   font-size: 12px;
 }
