@@ -71,9 +71,28 @@ body {
 .item-labels {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border-bottom: .25px solid gray;
+}
+
+.item-label-individual {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-start;
+  align-items: center; */
+}
+
+.item-label-individual form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-label-individual button {
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
 }
 
 .lineItemContainer {
