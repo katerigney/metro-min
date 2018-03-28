@@ -44,7 +44,7 @@ const getGroups = (paramsObj) => {
     type: "GET", // GET = requesting data
     url: searchUrl,
     success: function (data) {
-      console.log(data)
+      // console.log(data)
       data
         .data
         .forEach((group) => {
@@ -55,18 +55,17 @@ const getGroups = (paramsObj) => {
     // error: function()
     dataType: 'jsonp'
   }).then((data2) => {
-    console.log("getting groups", data2)
+    // console.log("getting groups", data2)
     const _data = data2.data;
     // create array for all the promies,
     const _tasks = _data.map((item, index) => {
-      // console.log(index);
       return getUser(item.organizer.id, index);
     });
-    console.log(_tasks)
+    // console.log(_tasks)
     Promise
       .all(_tasks)
       .then((done) => {
-        console.log("we are done")
+        // console.log("we are done")
         addLineItemContainer();
       });
 
@@ -80,16 +79,14 @@ const getUser = (id, ind) => {
       url: `https://api.meetup.com/2/member/${id}?key=${API_KEY}&sign=true&photo-host=public&fields=messaging_pref&page=20`,
       dataType: 'jsonp',
       success: function (data) {
-        console.log(ind);
+        // console.log(ind);
         data.groupName = foundGroups[ind];
         data.rating = 0;
         data.changeRate = function(val) {
           // Using a normal function changes the this binding.
-          // TODO: connect a input field to this function and collect the value.
-          console.log(`${this.rating} is being replaced with ${val}`);
+          // console.log(`${this.rating} is being replaced with ${val}`);
           this.rating = Number(val);
         }
-        // 
         data.DOMElements = {};
         // Not very DRY, but we can worry about that later.
         data.DOMElements.rating = createDOMElement("input", "", "number");
@@ -104,7 +101,6 @@ const getUser = (id, ind) => {
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
         data.DOMElements.name = createDOMElement("p", data.name);
-        // data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
         }
@@ -122,31 +118,17 @@ const addLineItemContainer = () => {
   let parent = document.querySelector(".feed-container");
   parent.innerHTML = "";
   for (let i = 0; i < leaderInfo.length; i++) {
-    // let parent = document.querySelector(".feed-container");
     let section = document.createElement('section');
     parent.appendChild(section);
     section
       .classList
       .add("lineItemContainer");
-    // addDataToRow();
-    console.log("looping", leaderInfo[i].name);
-    // for (let i = 0; i < leaderInfo.length; i++) {
-    //   let parent2 = document.querySelector(".lineItemContainer");
-    //   let section2 = document.createElement('section');
-    //   parent2.appendChild(section2);
-    //   section2.classList.add("lineItemPropertyContainer");
-
+    // console.log("looping", leaderInfo[i].name);
     section.appendChild(leaderInfo[i].DOMElements.name);
     section.appendChild(leaderInfo[i].DOMElements.org);
     section.appendChild(leaderInfo[i].DOMElements.location);
     section.appendChild(leaderInfo[i].DOMElements.contact);
     section.appendChild(leaderInfo[i].DOMElements.rating);
-      // name(i, section);
-      // org(i, section);
-      // locationDisplay(i, section);
-      // contact(i, section);
-      // rating(section);
-    // }
   }
 }
 
@@ -155,7 +137,6 @@ const addLineItemContainer = () => {
 // Takes in the property and direction and returns a new leaderInfo array with the returned properties.
 
 const sortLeaders = (prop, dir) => {
-  console.log(leaderInfo[0][prop], dir);
   let newArr = leaderInfo.sort((a,b) => {
     if(prop === "rating" && dir === "asc") {
       return Number(a[prop]) - Number(b[prop]);
@@ -163,8 +144,6 @@ const sortLeaders = (prop, dir) => {
       return Number(b[prop]) - Number(a[prop]);
     }
     if(dir === "asc") {
-      console.log(a[prop], b[prop]);
-      // return a.name - b.name;
       if(a[prop].toLowerCase() < b[prop].toLowerCase()) {
         return -1;
       } else if (a[prop].toLowerCase() > b[prop].toLowerCase()) {
@@ -173,7 +152,6 @@ const sortLeaders = (prop, dir) => {
         return 0;
       }
     } else {
-      // return b.name - a.name;
       if(a[prop].toLowerCase() > b[prop].toLowerCase()) {
         return -1;
       } else if (a[prop].toLowerCase() < b[prop].toLowerCase()) {
@@ -184,11 +162,9 @@ const sortLeaders = (prop, dir) => {
     }
 
   });
-  // console.log(newArr);
   leaderInfo = newArr;
   addLineItemContainer();
 }
-
 
 
 const name = (index, section) => {
@@ -197,7 +173,7 @@ const name = (index, section) => {
 }
 
 const org = (index, section) => {
-  console.log(index, leaderInfo[index])
+  // console.log(index, leaderInfo[index])
   let insertText = leaderInfo[index].groupName;
   addText(insertText, section);
 }
@@ -205,26 +181,26 @@ const org = (index, section) => {
 const locationDisplay = (index, section) => {
   let insertText = leaderInfo[index].city;
   addText(insertText, section);
-  console.log(insertText)
+  // console.log(insertText)
 }
 
 const contact = (index, section) => {
   let insertText = leaderInfo[index].link;
   addText(insertText, section);
-  console.log(insertText)
+  // console.log(insertText)
 }
 
 // Temp, replace with rating on leader object.
 const rating = (section) => {
   let insertText = "placeholder rating";
   addText(insertText, section);
-  console.log(insertText)
+  // console.log(insertText)
 }
 
 
 const addText = (insertText, section) => {
   let newText = createNode('p')
-  console.log(newText)
+  // console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
 }
@@ -248,8 +224,6 @@ const createDOMElement = (type, text, inputType ) => {
   }
   temp.textContent = text;
   return temp;
-  // data.DOMElements.rating = document.createElement(type);
-  // data.DOMElements.rating.setAttribute("type", "number");
 }
 
 // COMMENTING MODAL Open the modal
