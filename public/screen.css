@@ -57,13 +57,13 @@ body {
   /* align-items: center; */
 }
 
-#sort-by {
+.sort-by {
   color: gray;
   /* padding: -.25em 0em; */
 }
 
 .feed-container{
-  margin:1em 3em 1em 3em ;
+  /* margin:1em 3em 1em 3em ; */
   display: flex;
   flex-direction: column;
 }
@@ -71,8 +71,28 @@ body {
 .item-labels {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   border-bottom: .25px solid gray;
+}
+
+.item-label-individual {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-start;
+  align-items: center; */
+}
+
+.item-label-individual form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-label-individual button {
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
 }
 
 .lineItemContainer {
@@ -82,13 +102,21 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-content: center;
+  align-items: center;
 }
 
-/* .lineItemPropertyContainer {
-  margin: 0em;
-  padding:1em;
-  max-width: 100%;
-} */
+.lineItemContainer > p {
+  flex-basis: 20%;
+  text-align: center;
+  font-size: 12px;
+}
+
+.lineItemContainer > a {
+  flex-basis: 20%;
+  text-align: center;
+  font-size: 12px;
+}
 
 .lineItemContainer:nth-child(2n) {
   background: rgb(219, 219, 219);
@@ -139,4 +167,9 @@ body {
 
 .comment-input-container > input {
   width: 75%;
+}
+
+.link{
+  color: #225575;
+  font-family: 'Permanent Marker', cursive;
 }

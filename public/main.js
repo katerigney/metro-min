@@ -224,7 +224,7 @@ const rating = (section) => {
 
 
 const addText = (insertText, section) => {
-  let newText = createNode('p')
+  let newText = createNode('h4')
   console.log(newText)
   newText.textContent = insertText;
   append(section, newText);
