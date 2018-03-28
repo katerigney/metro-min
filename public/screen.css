@@ -99,12 +99,6 @@ body {
   font-size: 12px;
 }
 
-/* .lineItemPropertyContainer {
-  margin: 0em;
-  padding:1em;
-  max-width: 100%;
-} */
-
 .lineItemContainer:nth-child(2n) {
   background: rgb(219, 219, 219);
   padding:1em 0em 1em 0em;
