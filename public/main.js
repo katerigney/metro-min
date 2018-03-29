@@ -176,25 +176,13 @@ const modalEvent = (idx, info) => {
 
 const sortLeaders = (prop, dir) => {
   console.log(leaderInfo[0][prop], dir);
-<<<<<<< HEAD
-  console.log(leaderInfo[1][prop], dir);
-  let newArr = leaderInfo.sort((a,b) => {
-    console.log(a,b);
-    if(prop === "rating" && dir === "asc") {
-=======
   let newArr = leaderInfo.sort((a, b) => {
     if (prop === "rating" && dir === "asc") {
->>>>>>> 59aa73e4f690a28bfb932082d8cad915004e82df
       return Number(a[prop]) - Number(b[prop]);
     } else if (prop === "rating" && dir !== "asc") {
       return Number(b[prop]) - Number(a[prop]);
     }
-<<<<<<< HEAD
-    if(dir === "asc") {
-      console.log(a,b);
-=======
     if (dir === "asc") {
->>>>>>> 59aa73e4f690a28bfb932082d8cad915004e82df
       console.log(a[prop], b[prop]);
       // return a.name - b.name;
       if (a[prop].toLowerCase() < b[prop].toLowerCase()) {
