@@ -22,72 +22,70 @@
     <button class="button">LOG IN</button>
   </section>
 
- 
+
 
 
 
   <section class="hero-container">
     <section class="feed-management">
       <form>
-        <!-- <input type="text" class="searchBox"> -->
         <input class="zipCode" type="text" placeholder="ZIP code">
         <input class="radius" type="text" placeholder="Radius (1-100)">
         <input class="count" type="text" placeholder="How many results?">
         <button type="button" class="button" onclick="locationSearch()">SEARCH</button>
       </form>
+    </section>
+    <section class="localBizData">
+      <a class="link" href="ftp://ftp.dos.state.fl.us/public/doc/cor/">Tampa Bay Region Businesses</a>
+      <input class="button" type="file" id="fileUpload" />
+    </section>
+
+
   </section>
-  
-      <a class = "link" href="ftp://ftp.dos.state.fl.us/public/doc/cor/">Tampa Bay Region Businesses</a>
-      <input type="file" id="fileUpload"/>
 
-    
+  <section class="item-labels">
 
-      <h6 id="sort-by">Sort by</h6>
+    <section class="item-label-individual">
+      <h5 class="items-detail" id="name">Name</h5>
+      <form>
+        <button class="button" type="button" onclick="sortLeaders('name','asc')">&#9650;</button>
+        <button class="button" type="button" onclick="sortLeaders('name','desc')">&#9660;</button>
+      </form>
     </section>
 
-    <section class="item-labels">
-
-      <section class="item-label-individual">
-        <h5 class="items-detail" id="name">Name</h5>
-        <form>
-          <button class="button" type="button" onclick="sortLeaders('name','asc')">&#9650;</button>
-          <button class="button" type="button" onclick="sortLeaders('name','desc')">&#9660;</button>
-        </form>
-      </section>
-
-      <section class="item-label-individual">
-        <h5 class="items-detail" id="org-aff">Organization/Affiliation</h5>
-        <form>
-          <button class="button" type="button" onclick="sortLeaders('groupName','asc')">&#9650;</button>
-          <button class="button" type="button" onclick="sortLeaders('groupName','desc')">&#9660;</button>
-        </form>
-      </section>
-
-      <section class="item-label-individual">
-        <h5 class="items-detail" id="from">Location</h5>
-        <form>
-          <button class="button" type="button" onclick="sortLeaders('city','asc')">&#9650;</button>
-          <button class="button" type="button" onclick="sortLeaders('city','desc')">&#9660;</button>
-        </form>
-      </section>
-
-      <section class="item-label-individual">
-        <h5 class="items-detail" id="from">Contact</h5>
-      </section>
-
-      <section class="item-label-individual">
-        <h5 class="items-detail" id="rating">Rating</h5>
-        <form>
-          <button class="button" type="button" onclick="sortLeaders('rating','asc')">&#9650;</button>
-          <button class="button" type="button" onclick="sortLeaders('rating','desc')">&#9660;</button>
-        </form>
-      </section>
-
+    <section class="item-label-individual">
+      <h5 class="items-detail" id="org-aff">Organization/Affiliation</h5>
+      <form>
+        <button class="button" type="button" onclick="sortLeaders('groupName','asc')">&#9650;</button>
+        <button class="button" type="button" onclick="sortLeaders('groupName','desc')">&#9660;</button>
+      </form>
     </section>
 
-    <section class="feed-container">
-
+    <section class="item-label-individual">
+      <h5 class="items-detail" id="from">Location</h5>
+      <form>
+        <button class="button" type="button" onclick="sortLeaders('city','asc')">&#9650;</button>
+        <button class="button" type="button" onclick="sortLeaders('city','desc')">&#9660;</button>
+      </form>
     </section>
+
+    <section class="item-label-individual">
+      <h5 class="items-detail" id="from">Contact</h5>
+    </section>
+
+    <section class="item-label-individual">
+      <h5 class="items-detail" id="rating">Rating</h5>
+      <form>
+        <button class="button" type="button" onclick="sortLeaders('rating','asc')">&#9650;</button>
+        <button class="button" type="button" onclick="sortLeaders('rating','desc')">&#9660;</button>
+      </form>
+    </section>
+
+  </section>
+
+  <section class="feed-container">
+
+  </section>
 
 
   <button class="addLineItem" onclick="addLineItem()">Add Line Item</button>
@@ -104,10 +102,18 @@
       <section class="close-button-container">
         <img src="./images/close-button.png" id="close-modal" onclick="closeModal()">
       </section>
-      <p class="name">Name: <span></span></p>
-      <p class="organization">Organization/Affiliation: <span></span></p>
-      <p class="location">Location: <span></span></p>
-      <p class="rating">Rating: <span></span></p>
+      <p class="name">Name:
+        <span></span>
+      </p>
+      <p class="organization">Organization/Affiliation:
+        <span></span>
+      </p>
+      <p class="location">Location:
+        <span></span>
+      </p>
+      <p class="rating">Rating:
+        <span></span>
+      </p>
       <form class="comment-input-container">
         <textarea rows="10" cols="50" class="commentBox"></textarea>
         <button class="button">ADD TO SPREADSHEET</button>
