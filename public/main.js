@@ -58,10 +58,7 @@ const getGroups = (paramsObj) => {
     console.log("getting groups", data2)
     const _data = data2.data;
     // create array for all the promies,
-    const _tasks = _data.map((item, index) => {
-      // console.log(index);
-      return getUser(item.organizer.id, index);
-    });
+    const _tasks = _data.map((item, index) => getUser(item.organizer.id, index));
     console.log(_tasks)
     Promise
       .all(_tasks)
@@ -104,6 +101,7 @@ const getUser = (id, ind) => {
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
         data.DOMElements.name = createDOMElement("p", data.name);
+        data.comment = ""
         // data.changeRate();
         if (data.messagable === true) {
           leaderInfo.push(data);
@@ -154,11 +152,19 @@ const addLineItemContainer = () => {
 const modalEvent = (idx, info) => {
   return () => {
     console.dir(info)
-    modal.querySelector(".name span").textContent = info.name
-    modal.querySelector(".organization span").textContent = info.organization
-    modal.querySelector(".location span").textContent = info.location
-    modal.querySelector(".rating span").textContent = info.rating
+    modal.querySelector(".name span").textContent = info.name;
+    modal.querySelector(".organization span").textContent = info.groupName;
+    modal.querySelector(".location span").textContent = info.city;
+    modal.querySelector(".rating span").textContent = info.rating;
+    modal.querySelector("textarea").value = info.comment;
     modal.style.display = "block";
+    const saveComment = (e) => {
+      e.preventDefault();
+      info.comment = modal.querySelector("textarea").value;
+      modal.querySelector("button.button").removeEventListener('click', saveComment);
+      closeModal()
+    }
+    modal.querySelector("button.button").addEventListener('click', saveComment)
   }
 }
 // props: "rating", "city", "name",  and "groupName".

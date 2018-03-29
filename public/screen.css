@@ -104,15 +104,10 @@ body {
   justify-content: space-between;
   align-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.lineItemContainer > p {
-  flex-basis: 20%;
-  text-align: center;
-  font-size: 12px;
-}
-
-.lineItemContainer > a {
+.lineItemContainer > p, .lineItemContainer > a {
   flex-basis: 20%;
   text-align: center;
   font-size: 12px;
@@ -141,11 +136,11 @@ body {
 }
 
 .modal-content {
-  background-color: #ffffff;
+  background-color: #fff;
   margin: 15% auto; 
   padding:2em;
-  border: 1px solid #888888;
-  width: 80%;
+  border: 1px solid #888;
+  width: 40%;
 }
 
 .close-button-container {
