@@ -111,6 +111,9 @@ body {
   justify-content: space-around;
   align-content: center;
   align-items: center;
+}
+
+.lineItemContainer .name {
   cursor: pointer;
 }
 

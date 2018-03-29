@@ -102,6 +102,7 @@ const getUser = (id, ind) => {
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
         data.DOMElements.name = createDOMElement("p", data.name);
+        data.DOMElements.name.classList.add("name")
         data.comment = ""
         // data.changeRate();
         if (data.messagable === true) {
@@ -124,7 +125,7 @@ const addLineItemContainer = () => {
     // let parent = document.querySelector(".feed-container");
     let section = document.createElement('section');
     parent.appendChild(section)
-    section.addEventListener('click', modalEvent(i, leaderInfo[i]))
+
     section
       .classList
       .add("lineItemContainer");
@@ -138,6 +139,7 @@ const addLineItemContainer = () => {
     //   section2.classList.add("lineItemPropertyContainer");
 
     section.appendChild(leaderInfo[i].DOMElements.name);
+    section.querySelector(".name").addEventListener('click', modalEvent(i, leaderInfo[i]))
     section.appendChild(leaderInfo[i].DOMElements.org);
     section.appendChild(leaderInfo[i].DOMElements.location);
     section.appendChild(leaderInfo[i].DOMElements.contact);
