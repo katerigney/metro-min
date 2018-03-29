@@ -89,9 +89,10 @@
 
     </section>
 
+
   <button class="addLineItem" onclick="addLineItem()">Add Line Item</button>
 
-  <button class="open-modal" onclick="testButton()">Test Modal</button>
+
 
   </section>
 
@@ -103,14 +104,13 @@
       <section class="close-button-container">
         <img src="./images/close-button.png" id="close-modal" onclick="closeModal()">
       </section>
-      <p>Name</p>
-      <p>Title</p>
-      <p>Organization/Affiliation</p>
-      <p>Location</p>
-      <p>Rating</p>
+      <p class="name">Name: <span></span></p>
+      <p class="organization">Organization/Affiliation: <span></span></p>
+      <p class="location">Location: <span></span></p>
+      <p class="rating">Rating: <span></span></p>
       <form class="comment-input-container">
         <textarea rows="10" cols="50" class="commentBox"></textarea>
-        <button type="button" class="button" onclick="addItemToSpreadsheet()">ADD TO SPREADSHEET</button>
+        <button class="button">ADD TO SPREADSHEET</button>
       </form>
 
     </section>

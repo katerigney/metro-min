@@ -106,20 +106,12 @@ body {
   justify-content: space-around;
   align-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.lineItemContainer > * {
-  flex-basis: 300px;
-}
 
-.lineItemContainer > p {
-  /* flex-basis: 20%; */
-  text-align: center;
-  font-size: 12px;
-}
+.lineItemContainer > p, .lineItemContainer > a {
 
-.lineItemContainer > a {
-  /* flex-basis: 20%; */
   text-align: center;
   font-size: 12px;
 }
@@ -147,11 +139,11 @@ body {
 }
 
 .modal-content {
-  background-color: #ffffff;
+  background-color: #fff;
   margin: 15% auto; 
   padding:2em;
-  border: 1px solid #888888;
-  width: 80%;
+  border: 1px solid #888;
+  width: 40%;
 }
 
 .close-button-container {
