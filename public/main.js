@@ -157,13 +157,16 @@ const addLineItemContainer = () => {
 
 const sortLeaders = (prop, dir) => {
   console.log(leaderInfo[0][prop], dir);
+  console.log(leaderInfo[1][prop], dir);
   let newArr = leaderInfo.sort((a,b) => {
+    console.log(a,b);
     if(prop === "rating" && dir === "asc") {
       return Number(a[prop]) - Number(b[prop]);
     } else if (prop === "rating" && dir !== "asc") {
       return Number(b[prop]) - Number(a[prop]);
     }
     if(dir === "asc") {
+      console.log(a,b);
       console.log(a[prop], b[prop]);
       // return a.name - b.name;
       if(a[prop].toLowerCase() < b[prop].toLowerCase()) {
