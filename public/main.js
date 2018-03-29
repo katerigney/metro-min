@@ -102,6 +102,8 @@ const getUser = (id, ind) => {
         data.DOMElements.location = createDOMElement("p", data.city);
         data.DOMElements.org = createDOMElement("p", data.groupName);
         data.DOMElements.name = createDOMElement("p", data.name);
+        // This line was changed!
+        data.DOMElements.name.addEventListener('click', modalEvent(ind, data));
         data.DOMElements.name.classList.add("name")
         data.comment = ""
         // data.changeRate();
@@ -139,7 +141,7 @@ const addLineItemContainer = () => {
     //   section2.classList.add("lineItemPropertyContainer");
 
     section.appendChild(leaderInfo[i].DOMElements.name);
-    section.querySelector(".name").addEventListener('click', modalEvent(i, leaderInfo[i]))
+    // section.querySelector(".name").addEventListener('click', modalEvent(i, leaderInfo[i]))
     section.appendChild(leaderInfo[i].DOMElements.org);
     section.appendChild(leaderInfo[i].DOMElements.location);
     section.appendChild(leaderInfo[i].DOMElements.contact);
@@ -153,6 +155,7 @@ const addLineItemContainer = () => {
   }
 }
 const modalEvent = (idx, info) => {
+  console.log("This works!");
   return () => {
     console.dir(info)
     modal.querySelector(".name span").textContent = info.name;
@@ -337,11 +340,20 @@ document.querySelector("#fileUpload").addEventListener('change', handleFile, fal
       govdataObj.DOMElements.rating.setAttribute("min", 0);
       govdataObj.DOMElements.rating.setAttribute("max", 5);
       govdataObj.DOMElements.rating.setAttribute("value", 0);
+      govdataObj.changeRate = function (val) {
+        // Using a normal function changes the this binding.
+        // TODO: connect a input field to this function and collect the value.
+        console.log(`${this.rating} is being replaced with ${val}`);
+        this.rating = Number(val);
+      }
       
       govdataObj.DOMElements.contact = createDOMElement("a",govdataObj.link, govdataObj.link);
       govdataObj.DOMElements.location = createDOMElement("p", govdataObj.city);
       govdataObj.DOMElements.org = createDOMElement("p", govdataObj.groupName);
       govdataObj.DOMElements.name = createDOMElement("p", govdataObj.name);
+      govdataObj.DOMElements.rating.addEventListener("input", (e) => {
+        govdataObj.changeRate(e.target.value);
+      });
       leaderInfo.push(govdataObj)
     }
     console.log(leaderInfo)
